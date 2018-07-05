@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="en">
+</head> 
+<body>
+	<div th:fragment="message" th:if="${messagesResponse != null}">
+		<span th:if="${messagesResponse.status == 'E'}"  th:text="${messagesResponse.message}" class="label label-danger"></span>
+		<span th:if="${messagesResponse.status == 'S'}"  th:text="${messagesResponse.message}" class="label label-success">Success</span>
+		<br style="margin-bottom: 5px;"/>
+	</div>
+	
+	<!-- Modal expiredSession -->
+	<div th:fragment="expiredSession">
+		<div class="modal fade" data-backdrop="static" id="expiredSession">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content panel-primary">
+					<div class="modal-header">
+		               <button type="button" class="close expiredButton" data-dismiss="modal">×</button>
+		               <h4 class="modal-title">Modal Header</h4>
+		            </div>
+					<div class="modal-body">
+			        	<div>
+							Your session has expired. please login again...
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-sm expiredButton" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End modal expiredSession -->
+	
+	<!-- Modal errorAjax -->
+	<div th:fragment="errorAjax">
+		<div class="modal fade" data-backdrop="static" id="errorAjax">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content panel-primary">
+					<div class="modal-header">
+		               <button type="button" class="close" data-dismiss="modal">×</button>
+		               <h4 class="modal-title">Modal Header</h4>
+		            </div>
+					<div class="modal-body">
+			        	<div>
+							<label id="error"></label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End modal errorAjax -->
+	
+	<!-- Modal eyeText -->
+	<div th:fragment="eyeText">
+		<div class="modal fade" data-backdrop="static" id="eyeText">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content panel-primary">
+					<div class="modal-header">
+		               <button type="button" class="close" data-dismiss="modal">×</button>
+		               <h4 class="modal-title">Modal Header</h4>
+		            </div>
+					<div class="modal-body">
+			        	<textarea disabled="disabled" id="error" style="resize: none; min-width: 100%; min-height: 300px;"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End modal eyeText -->
+	
+	<!-- Modal load -->
+	<div th:fragment="load">
+		<div class="modal fade" data-backdrop="static" id="load">
+			<div class="modal-dialog" role="document">
+				<div class="loader">
+	                <div class="loader-inner-1"></div>
+	                <div class="loader-inner-2"></div>
+	                <div class="loader-inner-3"></div>
+	                <div class="loader-inner-4"></div>
+	                <div class="loader-inner-5"></div>
+	                <div class="loader-inner-6"></div>
+	                <div class="loader-inner-7"></div>
+	                <div class="loader-inner-8"></div>
+	                <div class="loader-inner-9"></div>
+	                <div class="loader-inner-10"></div>
+	            </div>
+			</div>
+		</div>
+	</div>
+	<!-- End modal errorAjax -->
+</body>
+</html>

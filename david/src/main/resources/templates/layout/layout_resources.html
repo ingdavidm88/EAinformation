@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="head" lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf_header" th:if="${tp != null}" th:content="${tp.headerName}"/>
+	<meta name="csrf" th:if="${tp != null}" th:content="${tp.token}"/>
+    
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-datetimepicker.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/layout/load.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/layout/general.css}"/>
+    
+    <title>EAinformation</title>
+</head> 
+<body>
+	<div th:fragment="scripts">
+	    <script type="text/javascript" th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+	    <script type="text/javascript" th:src="@{/assets/js/bootstrap.min.js}"></script>
+	    <script type="text/javascript" th:src="@{/assets/js/bootstrap-datetimepicker.min.js}"></script>
+	    <script type="text/javascript" th:src="@{/assets/js/layout/general.js}"></script>
+	</div>
+</body>
+</html>

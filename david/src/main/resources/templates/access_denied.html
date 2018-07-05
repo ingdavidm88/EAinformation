@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<head th:replace="layout/layout_resources :: head"></head>
+</head>
+<body style="background-image: url('../david/assets/images/1.jpg'); background-attachment: fixed;">
+	<br/><br/><br/>
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10 box">
+			<div class="text-center">
+				<i class="fa fa-5x fa-frown-o" style="color:#265a88;"></i>
+			</div>
+			<h1 class="text-center">403 Access Denied
+				<p>
+					<small class="text-center">You do not have permission to view this resource</small>
+				</p>
+			</h1>
+			<p class="text-center">Try pressing the back button or clicking on this button.</p>
+			<p class="text-center">
+				<a class="btn btn-primary btn-sm" href="/david/index">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Take Me Home
+				</a>
+			</p>
+		</div>
+		<div class="col-sm-1"></div>
+	</div>
+	
+	<div th:replace="layout/layout_footer :: footer"></div>
+	<div th:replace="layout/layout_resources :: scripts"></div>
+</body>
+</html>

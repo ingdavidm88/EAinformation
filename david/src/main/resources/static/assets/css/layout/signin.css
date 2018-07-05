@@ -1,0 +1,20 @@
+.logo{
+    margin: auto;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.logo img{
+    height: 60px;
+}
+
+.glyphicon{
+	color: #fff;
+}
+
+.forGotPassword{
+    padding: 15px 0px;
+    text-align: center;
+    border-radius: 10px;
+}

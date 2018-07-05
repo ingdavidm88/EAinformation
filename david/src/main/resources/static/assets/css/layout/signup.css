@@ -1,0 +1,23 @@
+.left{
+	margin: 0px; 
+	padding: 0px; 
+	padding-right: 5px;
+}
+
+.right{
+	margin: 0px; 
+	padding: 0px; 
+	padding-left: 5px;
+}
+
+@media (max-width: 768px) {
+	.left{
+		margin: 0px; 
+		padding: 0px; 
+	}
+
+	.right{
+		margin: 0px; 
+		padding: 0px; 
+	}
+}

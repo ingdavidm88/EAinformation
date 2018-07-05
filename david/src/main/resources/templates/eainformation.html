@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<head th:replace="layout/layout_resources :: head"></head>
+	<link rel="stylesheet" th:href="@{/assets/css/layout/wizard.css}"/>
+	<link rel="stylesheet" th:href="@{/assets/css/layout/progressbar.css}"/>
+</head>
+<body style="background-image: url('../david/assets/images/1.jpg'); background-attachment: fixed;">
+	<div th:replace="layout/layout_horizontal_menu :: h-nav"></div>
+	<div th:replace="layout/layout_vertical_menu :: v-nav"></div>
+		
+	<div class="box form-panel">
+		<div class="table-responsive main-body1">
+			<div class="wizard">
+				<div class="wizard-inner">
+					<div class="connecting-line"></div>
+					<ul class="nav nav-tabs" role="tablist">
+			
+						<li role="presentation" class="active">
+							<a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+								<span class="round-tab">
+									<i class="glyphicon glyphicon-tasks"></i>
+								</span>
+							</a>
+						</li>
+			
+						<li role="presentation" class="disabled">
+							<a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+								<span class="round-tab">
+									<i class="glyphicon glyphicon-sort-by-alphabet"></i>
+								</span>
+							</a>
+						</li>
+						<li role="presentation" class="disabled">
+							<a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+								<span class="round-tab">
+									<i class="glyphicon glyphicon glyphicon-list-alt"></i>
+								</span>
+							</a>
+						</li>
+						<li role="presentation" class="disabled">
+							<a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Step 4">
+								<span class="round-tab">
+									<i class="glyphicon glyphicon-picture"></i>
+								</span>
+							</a>
+						</li>
+			
+						<li role="presentation" class="disabled">
+							<a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+								<span class="round-tab">
+									<i class="glyphicon glyphicon-ok"></i>
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			
+				<div class="tab-content">
+					<div class="tab-pane active" role="tabpanel" id="step1">
+						<div class="col-sm-12">
+							<div class="offer offer-radius offer-primary">
+								<div class="shape">
+									<div class="shape-text">Step 1</div>
+								</div>
+								<div class="offer-content">
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Status:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="status_1"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Processing:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="processing_1"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Success:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-success" id="success_1"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Fail:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-warning" id="fail_1"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Error:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-danger" id="error_1"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<br/><br/><br/>
+										<div class="progress">
+							                <div id="progress-bar1" class="progress-bar" style="width:0%; padding-right:  0px;">
+							                    <div id="progress-value1" class="progress-value">0%</div>
+							                </div>
+							            </div>
+									</div>
+									<div class="col-sm-12">
+										<br/><br/>
+										<button class="btn btn-primary btn-sm" id="eainformation1">
+											<span class="glyphicon glyphicon-off" aria-hidden="true"></span> Start
+										</button>
+										<button id="continue_1" type="button" class="btn btn-primary next-step btn-sm" disabled="true">Continue</button>
+										<br/><br/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12"><br/></div>
+					</div>
+					<div class="tab-pane" role="tabpanel" id="step2">
+						<div class="col-sm-12">
+							<div class="offer offer-radius offer-primary">
+								<div class="shape">
+									<div class="shape-text">Step 2</div>
+								</div>
+								<div class="offer-content">
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Status:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="status_2"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Processing:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="processing_2"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Success:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-success" id="success_2"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Fail:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-warning" id="fail_2"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Error:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-danger" id="error_2"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<br/><br/><br/>
+										<div class="progress">
+							                <div id="progress-bar2" class="progress-bar" style="width:0%; padding-right:  0px;">
+							                    <div id="progress-value2" class="progress-value">0%</div>
+							                </div>
+							            </div>
+							        </div>
+							        <div class="col-sm-12">
+							        	<br/><br/>
+										<button class="btn btn-primary btn-sm" id="eainformation2">
+											<span class="glyphicon glyphicon-off" aria-hidden="true"></span> Start
+										</button>
+										<button id="continue_2" type="button" class="btn btn-primary next-step btn-sm" disabled="true">Continue</button>
+										<br/><br/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12"><br/></div>
+					</div>
+					<div class="tab-pane" role="tabpanel" id="step3">
+						<div class="col-sm-12">
+							<div class="offer offer-radius offer-primary">
+								<div class="shape">
+									<div class="shape-text">Step 3</div>
+								</div>
+								<div class="offer-content">
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Status:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="status_3"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Processing:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="processing_3"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Success:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-success" id="success_3"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Fail:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-warning" id="fail_3"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Error:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-danger" id="error_3"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<br/><br/><br/>
+										<div class="progress">
+							                <div id="progress-bar3" class="progress-bar" style="width:0%; padding-right:  0px;">
+							                    <div id="progress-value3" class="progress-value">0%</div>
+							                </div>
+							            </div>
+							        </div>
+							        <div class="col-sm-12">
+							        	<br/><br/>
+										<button class="btn btn-primary btn-sm" id="eainformation3">
+											<span class="glyphicon glyphicon-off" aria-hidden="true"></span> Start
+										</button>
+										<button id="continue_3" type="button" class="btn btn-primary next-step btn-sm" disabled="true">Continue</button>
+										<br/><br/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12"><br/></div>
+					</div>
+					<div class="tab-pane" role="tabpanel" id="step4">
+						<div class="col-sm-12">
+							<div class="offer offer-radius offer-primary">
+								<div class="shape">
+									<div class="shape-text">Step 4</div>
+								</div>
+								<div class="offer-content">
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Status:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="status_4"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Processing:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="processing_4"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Success:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-success" id="success_4"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Fail:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-warning" id="fail_4"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Error:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-danger" id="error_4"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<br/><br/><br/>
+										<div class="progress">
+							                <div id="progress-bar4" class="progress-bar" style="width:0%; padding-right:  0px;">
+							                    <div id="progress-value4" class="progress-value">0%</div>
+							                </div>
+							            </div>
+							        </div>
+							        <div class="col-sm-12">
+							        	<br/><br/>
+										<button class="btn btn-primary btn-sm" id="eainformation4">
+											<span class="glyphicon glyphicon-off" aria-hidden="true"></span> Start
+										</button>
+										<button id="continue_4" type="button" class="btn btn-primary next-step btn-sm" disabled="true">Continue</button>
+										<br/><br/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12"><br/></div>
+					</div>
+					<div class="tab-pane" role="tabpanel" id="complete">
+						<div class="col-sm-12">
+							<div class="offer offer-radius offer-primary">
+								<div class="shape">
+									<div class="shape-text">Step 5</div>
+								</div>
+								<div class="offer-content">
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Status:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="status_5"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Processing:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-primary" id="processing_5"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Success:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-success" id="success_5"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Fail:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-warning" id="fail_5"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-1" style="margin: 0px; padding: 0px;">Error:</div>
+										<div class="col-sm-11" style="margin: 0px; padding: 0px;"> <label class="label label-danger" id="error_5"></label></div>
+									</div>
+									<div class="col-sm-12">
+										<br/><br/><br/>
+										<div class="progress">
+							                <div id="progress-bar5" class="progress-bar" style="width:0%; padding-right:  0px;">
+							                    <div id="progress-value5" class="progress-value">0%</div>
+							                </div>
+							            </div>
+							        </div>
+							        <div class="col-sm-12">
+							        	<br/><br/>
+										<button class="btn btn-primary btn-sm" id="eainformation5">
+											<span class="glyphicon glyphicon-off" aria-hidden="true"></span> Start
+										</button>
+										<button id="continue_5" type="button" class="btn btn-primary next-step btn-sm" disabled="true">Continue</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12"><br/></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="layout/layout_resources :: scripts"></div>
+	<script type="text/javascript" th:src="@{/assets/js/layout/eainformation.js}"></script>
+</body>
+</html>

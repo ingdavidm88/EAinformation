@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<head th:replace="layout/layout_resources :: head"></head>
+</head>
+<body style="background-image: url('../david/assets/images/1.jpg'); background-attachment: fixed;">
+	<div th:replace="layout/layout_horizontal_menu :: h-nav"></div>
+	<div th:replace="layout/layout_vertical_menu :: v-nav"></div>
+	
+	<div class="box form-panel">
+		<div class="main-head">
+			<form th:action="@{/searchlogerror}" method="post" modelAttribute="Pagination" autocomplete="off" id="formSearch">
+				<div class="table-responsive">
+					<div class="pull-left"><div th:replace="layout/layout_messages :: message"></div></div>
+					<div class="btn-toolbar pull-right">
+						<div class="btn-group">
+					    	<button type="submit" class="btn btn-primary btn-sm" id="search">
+					    		<span class="glyphicon glyphicon-search"></span>
+					    	</button>
+					    </div>
+						<div class="btn-group">
+					        <button type="button" class="btn btn-primary btn-sm" id="clear">
+					        	<span class="glyphicon glyphicon-remove"></span>
+					        </button>
+						</div>
+						<div class="btn-group">
+				        	<button id="prev" type="button" class="btn btn-primary btn-sm">
+				        		<span class="glyphicon glyphicon-chevron-left"></span>
+				        	</button>
+				        	<input type="hidden" id="page" name="pager.page" class="btn btn-default btn-sm" th:value="${pagination.pager.page}"/>
+				        	<input type="hidden" id="size" name="pager.size" class="btn btn-default btn-sm" th:value="${pagination.pager.size}"/>
+				        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.page}"></button>
+				        	<button type="button" class="btn btn-default btn-sm">
+				        		<span class="glyphicon glyphicon-minus"></span>
+				        	</button>
+				        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.size}"></button>
+				        	<button id="next" type="button" class="btn btn-primary btn-sm">
+				        		<span class="glyphicon glyphicon-chevron-right"></span>
+				        	</button>
+				      	</div>
+				      	<div class="btn-group">
+				        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.length}"></button>
+				      	</div>
+	    			</div>
+	    			<table class="table table-bordred table-striped">
+						<thead>
+							<tr>
+								<th width="20px"><input type="checkbox" id="checkthis"/></th>
+								<th width="200px">
+							        <input name="logError.idLogError" type="text" class="form-control input-sm"
+				                    	th:value="${pagination.logError.idLogError}"
+				                    	placeholder="Search id"/>
+						        </th>
+								<th width="200px">
+							        <input name="logError.userName" type="text" class="form-control input-sm" 
+				                    	th:value="${pagination.logError.userName}"
+				                    	placeholder="Search user name"/>
+								</th>
+								<th width="200px">
+							        <input name="logError.path" type="text" class="form-control input-sm" 
+				                    	th:value="${pagination.logError.path}"
+				                    	placeholder="Search path"/>
+								</th>
+								<th width="200px">
+									<input name="logError.date" type="text" 
+										class="form-control input-sm form_datetime"
+										th:value="${pagination.logError.date}"
+										placeholder="Search date"/>
+								</th>
+								<th width="200px">
+							        <input name="error" type="text" class="form-control input-sm"  placeholder="Search error"/>
+				              </th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</form>
+		</div>
+		<div class="table-responsive main-body">
+			<table class="table table-bordred table-striped">
+				<tbody>
+					<tr th:each="l : ${pagination.logErrorList}">
+						<td width="20px"><input type="checkbox" class="checkthis" /></td>
+						<td width="200px" th:text="${l.idLogError}"></td>
+						<td width="200px" th:text="${l.userName}"></td>
+						<td width="200px" th:text="${l.path}"></td>
+						<td width="200px" th:text="${l.date}"></td>
+						<td width="200px">
+							<div class="input-group">
+								<input type="text" 
+									class="input-sm ellipsis" 
+									th:value="${l.error}"/>
+								<div class="input-group-btn">
+									<label data-placement="bottom" data-toggle="tooltip" title="Edit" class="btn-sm eye-button">
+										<span class="glyphicon glyphicon-eye-open"></span>
+ 									</label>
+							  	</div>
+							</div>
+						</td>
+					</tr>
+					<tr th:if="${#lists.isEmpty(pagination.logErrorList)}" >
+						<td colspan="5" style="text-align: center;">No Search Result Found</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>	
+	
+	<div th:replace="layout/layout_footer :: footer"></div>
+	<div th:replace="layout/layout_resources :: scripts"></div>
+</body>
+</html>

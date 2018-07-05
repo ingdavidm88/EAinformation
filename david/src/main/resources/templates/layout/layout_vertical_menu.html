@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="en">
+</head> 
+<body>
+	<div th:fragment="v-nav">
+		<nav id="sidebar-wrapper">
+			<div class="nav-side-menu">
+				<div class="menu-list">
+					<div th:each="parentMenu : ${tp.parentMenuList}">
+						<li data-toggle="collapse" th:href="'#dropdown-lvl__${parentMenu.idParentMenu}__'" class="collapsed active">
+							<a href="#">
+								<span style="margin-left: 5px;" class="glyphicon glyphicon-list"></span>
+								<label style="width: 160px;" th:text="${parentMenu.menuName}"></label>
+								<span  class="arrow glyphicon glyphicon-menu-down"></span>
+							</a>
+						</li>
+						<ul class="sub-menu collapse" th:id="'dropdown-lvl__${parentMenu.idParentMenu}__'">
+							<li th:each="menu : ${parentMenu.menuList}">
+								<span class="glyphicon glyphicon-menu-right"></span>
+								<a th:href="'/david__${menu.urlName}__'" th:text="${menu.menuName}"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

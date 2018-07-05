@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<head th:replace="layout/layout_resources :: head"></head>
+</head>
+<body style="background-image: url('../david/assets/images/1.jpg'); background-attachment: fixed;">
+	<div th:replace="layout/layout_horizontal_menu :: h-nav"></div>
+	<div th:replace="layout/layout_vertical_menu :: v-nav"></div>
+	<div class="box form-panel">
+		<div class="table-responsive main-body1">
+			<div class="col-sm-4" th:each="i : ${#numbers.sequence( 1, 50)}" style="padding: 1% 0.5%;">
+				<div th:text="${i}"></div>
+				<div style="box-shadow: 0px 0px 2px 0px #000000;">
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="layout/layout_resources :: scripts"></div>
+</body>
+</html>
