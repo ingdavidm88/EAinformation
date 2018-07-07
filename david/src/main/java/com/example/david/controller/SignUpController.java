@@ -38,7 +38,7 @@ public class SignUpController {
 	public static final String PATTH_REGISTRATION = "/registration";
 	
 	@InitBinder("UserDetail")
-	public void setupBinder(WebDataBinder binder) {
+	protected void setupBinder(WebDataBinder binder) {
 	    binder.addValidators(new UserDetailValidator());
 	}
 	

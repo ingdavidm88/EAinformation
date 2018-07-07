@@ -29,7 +29,7 @@ public class SystemParametersServiceImpl implements SystemParametersService {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public void findAll(Pagination pagination) {
+	public void findAll(Pagination pagination, Long pageSize) {
 		StringBuilder sql = new StringBuilder();
 		SystemParameters systemParameters = pagination.getSystemParameters();
 		
@@ -67,7 +67,7 @@ public class SystemParametersServiceImpl implements SystemParametersService {
     	
     	Query query = manager.createNativeQuery(sql.toString(), SystemParameters.class);
     	
-    	pagination.getPage(query.getResultList().size(), this);
+    	pagination.getPage(query.getResultList().size(), pageSize);
     	
     	sql.append("limit ")
     	.append(""+pagination.getPager().getPaginaton()*(Math.abs(pagination.getPager().getPage()-1)))
@@ -82,5 +82,11 @@ public class SystemParametersServiceImpl implements SystemParametersService {
 	@Transactional
 	public SystemParameters findById(Integer idSystemParameters) {
 		return systemParametersRepository.findOne(idSystemParameters);	
+	}
+
+	@Override
+	@Transactional
+	public SystemParameters save(SystemParameters systemParameters) {
+		return systemParametersRepository.save(systemParameters);
 	}
 }

@@ -6,7 +6,7 @@ $(function() {
 	
 	$(document).tooltip({
 		selector: "[title]",
-		placement: 'top'
+		placement: 'bottom'
 	});
 	
 	$(".form_datetime").datetimepicker({
@@ -64,7 +64,7 @@ $(function() {
     });
 	
 	$('.eye-button').click(function () {
-		$("#eyeText").find("#error").val($(this).parent().parent().find('input').val());
-		$("#eyeText").modal();
+		$("#showText").find("#error").val($(this).parent().parent().find('input').val());
+		$("#showText").modal();
 	});
 });

@@ -6,7 +6,7 @@ import com.example.david.model.LogError;
 
 public interface LogErrorService{
 
-	public void findAll(Pagination pagination);
+	public void findAll(Pagination pagination, Long pageSize);
 	
 	public MessageResponse save(LogError logError);
 }

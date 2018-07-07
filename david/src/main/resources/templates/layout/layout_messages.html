@@ -5,7 +5,13 @@
 <body>
 	<div th:fragment="message" th:if="${messagesResponse != null}">
 		<span th:if="${messagesResponse.status == 'E'}"  th:text="${messagesResponse.message}" class="label label-danger"></span>
-		<span th:if="${messagesResponse.status == 'S'}"  th:text="${messagesResponse.message}" class="label label-success">Success</span>
+		<span th:if="${messagesResponse.status == 'S'}"  th:text="${messagesResponse.message}" class="label label-success"></span>
+		<br style="margin-bottom: 5px;"/>
+	</div>
+	
+	<div th:fragment="message1" id="message1">
+		<span class="label label-danger danger"></span>
+		<span class="label label-success success"></span>
 		<br style="margin-bottom: 5px;"/>
 	</div>
 	
@@ -32,9 +38,9 @@
 	</div>
 	<!-- End modal expiredSession -->
 	
-	<!-- Modal errorAjax -->
-	<div th:fragment="errorAjax">
-		<div class="modal fade" data-backdrop="static" id="errorAjax">
+	<!-- Modal showText -->
+	<div th:fragment="showText">
+		<div class="modal fade" data-backdrop="static" id="showText">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content panel-primary">
 					<div class="modal-header">
@@ -42,9 +48,7 @@
 		               <h4 class="modal-title">Modal Header</h4>
 		            </div>
 					<div class="modal-body">
-			        	<div>
-							<label id="error"></label>
-						</div>
+			        	<textarea readonly="readonly" id="error" style="resize: none; min-width: 100%; min-height: 300px;"></textarea>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
@@ -53,28 +57,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- End modal errorAjax -->
-	
-	<!-- Modal eyeText -->
-	<div th:fragment="eyeText">
-		<div class="modal fade" data-backdrop="static" id="eyeText">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content panel-primary">
-					<div class="modal-header">
-		               <button type="button" class="close" data-dismiss="modal">×</button>
-		               <h4 class="modal-title">Modal Header</h4>
-		            </div>
-					<div class="modal-body">
-			        	<textarea disabled="disabled" id="error" style="resize: none; min-width: 100%; min-height: 300px;"></textarea>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End modal eyeText -->
+	<!-- End modal showText -->
 	
 	<!-- Modal load -->
 	<div th:fragment="load">

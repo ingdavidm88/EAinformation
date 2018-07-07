@@ -63,7 +63,7 @@ public class LogErrorController {
 		
         try {
         	transactionPage = transactionUtilities.getTransactionPage(request, PATTH_LOGERROR);
-        	logErrorService.findAll(pagination);
+        	logErrorService.findAll(pagination, transactionPage.getPageSize());
         } catch (Exception exception) {
         	model.addAttribute(Constants.MESSAGESRESPONSE.val(), logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH)));
         }

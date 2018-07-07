@@ -11,6 +11,7 @@ import com.example.david.dto.TransactionPage;
 import com.example.david.model.ParentMenu;
 import com.example.david.service.MenuService;
 import com.example.david.service.ParentMenuService;
+import com.example.david.service.SystemParametersService;
 import com.example.david.service.UserService;
 
 public class TransactionUtilities {
@@ -19,7 +20,8 @@ public class TransactionUtilities {
 			HttpServletRequest request, 
 			UserService userService, 
 			ParentMenuService parentMenuService,
-			MenuService menuService) {
+			MenuService menuService,
+			SystemParametersService systemParametersService) {
 		
 		Object user = request.getSession().getAttribute("user");
 		TransactionPage transactionPage =  new TransactionPage();
@@ -43,6 +45,9 @@ public class TransactionUtilities {
 			transactionPage.setParentMenuList(parentMenuList);
 			transactionPage.setHeaderName(token.getHeaderName());
 			transactionPage.setToken(token.getToken());
+			
+			String pageSize = systemParametersService.findById(1).getValue();
+			transactionPage.setPageSize(new Long(pageSize));
 		}
 		
 		return transactionPage;

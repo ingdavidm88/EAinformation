@@ -15,6 +15,7 @@ import com.example.david.model.User;
 import com.example.david.service.LogErrorService;
 import com.example.david.service.MenuService;
 import com.example.david.service.ParentMenuService;
+import com.example.david.service.SystemParametersService;
 import com.example.david.service.UserService;
 import com.example.david.utils.TransactionUtilities;
 
@@ -32,6 +33,9 @@ public class SignInController {
 	
 	@Autowired
 	LogErrorService logErrorService;
+	
+	@Autowired
+	SystemParametersService systemParametersService;
 	
 	TransactionUtilities transactionUtilities = new TransactionUtilities();
 	TransactionPage transactionPage = new TransactionPage();
@@ -58,7 +62,7 @@ public class SignInController {
 	@RequestMapping(path = PATTH_INDEX, method = RequestMethod.GET)
     public String index(Model model, HttpServletRequest request) {
 		try {
-			transactionPage = transactionUtilities.getData(request, userService, parentMenuService, menuService);
+			transactionPage = transactionUtilities.getData(request, userService, parentMenuService, menuService, systemParametersService);
 			request.getSession().setAttribute("TransactionPage", transactionPage);
 			model.addAttribute("tp", transactionPage);
 		} catch (Exception exception) {

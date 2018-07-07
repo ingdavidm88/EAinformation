@@ -5,7 +5,9 @@ import com.example.david.model.SystemParameters;
 
 public interface SystemParametersService{
 
-	public void findAll(Pagination pagination);
+	public void findAll(Pagination pagination, Long pageSize);
 	
 	public SystemParameters findById(Integer idSystemParameters);
+	
+	public SystemParameters save(SystemParameters systemParameters);
 }

@@ -19,7 +19,9 @@ public class TransactionPage implements Serializable{
 	
 	private String token;
 	
-	private String headerName;	
+	private String headerName;
+	
+	private Long pageSize;
 
 	public String getUserName() {
 		return userName;
@@ -67,5 +69,13 @@ public class TransactionPage implements Serializable{
 
 	public void setHeaderName(String headerName) {
 		this.headerName = headerName;
+	}
+
+	public Long getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Long pageSize) {
+		this.pageSize = pageSize;
 	}
 }

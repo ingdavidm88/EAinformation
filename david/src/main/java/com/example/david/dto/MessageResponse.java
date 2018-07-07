@@ -1,8 +1,10 @@
 package com.example.david.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 
 public class MessageResponse implements Serializable{
 	
@@ -11,6 +13,8 @@ public class MessageResponse implements Serializable{
 	private String message;
 	
     private String status;
+    
+    private List<ObjectError> errors;
     
     public void setMessage(String message, String status) {
         this.message = message;
@@ -40,4 +44,12 @@ public class MessageResponse implements Serializable{
     public void setStatus(String status) {
         this.status = status;
     }
+
+	public List<ObjectError> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(List<ObjectError> errors) {
+		this.errors = errors;
+	}
 }

@@ -3,91 +3,85 @@
 <head>
 	<head th:replace="layout/layout_resources :: head"></head>
 </head>
-<body style="background-image: url('../david/assets/images/1.jpg'); background-attachment: fixed;">
+<body style="background-attachment: fixed; overflow: hidden;">
 	<div th:replace="layout/layout_horizontal_menu :: h-nav"></div>
 	<div th:replace="layout/layout_vertical_menu :: v-nav"></div>
 	
-	<div class="box form-panel">
-		<div class="main-head">
-			<form th:action="@{/searchsystemparameters}" method="post" modelAttribute="Pagination" autocomplete="off" id="formSearch">
-				<div class="table-responsive">
-					<div class="pull-left"><div th:replace="layout/layout_messages :: message"></div></div>
-					<div class="btn-toolbar pull-right">
-						<div class="btn-group">
-					    	<button class="btn btn-primary btn-sm" id="add">
-					    		<span class="glyphicon glyphicon-plus"></span>
-					    	</button>
-					    </div>
-						<div class="btn-group">
-					    	<button type="submit" class="btn btn-primary btn-sm" id="search">
-					    		<span class="glyphicon glyphicon-search"></span>
-					    	</button>
-					    </div>
-						<div class="btn-group">
-					        <button type="button" class="btn btn-primary btn-sm" id="clear">
-					        	<span class="glyphicon glyphicon-remove"></span>
-					        </button>
-						</div>
-						<div class="btn-group">
-				        	<button id="prev" type="button" class="btn btn-primary btn-sm">
-				        		<span class="glyphicon glyphicon-chevron-left"></span>
-				        	</button>
-				        	<input type="hidden" id="page" name="pager.page" class="btn btn-default btn-sm" th:value="${pagination.pager.page}"/>
-				        	<input type="hidden" id="size" name="pager.size" class="btn btn-default btn-sm" th:value="${pagination.pager.size}"/>
-				        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.page}"></button>
-				        	<button type="button" class="btn btn-default btn-sm">
-				        		<span class="glyphicon glyphicon-minus"></span>
-				        	</button>
-				        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.size}"></button>
-				        	<button id="next" type="button" class="btn btn-primary btn-sm">
-				        		<span class="glyphicon glyphicon-chevron-right"></span>
-				        	</button>
-				      	</div>
-				      	<div class="btn-group">
-				        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.length}"></button>
-				      	</div>
-	    			</div>
-	    			<table class="table table-bordred table-striped">
-						<thead>
-							<tr>
-								<th width="20px"><input type="checkbox" id="checkthis"/></th>
-								<th width="200px">
-							        <input name="systemParameters.idSystemParameters" type="text" class="form-control input-sm"
-				                    	th:value="${pagination.systemParameters.idSystemParameters}"
-				                    	placeholder="Search id"/>
-						        </th>
-								<th width="200px">
-							        <input name="systemParameters.value" type="text" class="form-control input-sm" 
-				                    	th:value="${pagination.systemParameters.value}"
-				                    	placeholder="Search value"/>
-								</th>
-								<th width="200px">
-							        <input name="systemParameters.description" type="text" class="form-control input-sm" 
-				                    	th:value="${pagination.systemParameters.description}"
-				                    	placeholder="Search description"/>
-								</th>
-								<th width="200px">
-									<input name="systemParameters.userName" type="text" 
-										class="form-control input-sm"
-										th:value="${pagination.systemParameters.userName}" placeholder="Search user name"/>
-								</th>
-								<th width="200px">
-									<input name="systemParameters.date" type="text" 
-										class="form-control input-sm form_datetime"
-										th:value="${pagination.systemParameters.date}" placeholder="Search date"/>
-								</th>
-								<th width="50px">
-<!-- 									<input type="text"  -->
-<!-- 										class="form-control input-sm" -->
-<!-- 										placeholder="Edit" disabled="disabled"/> -->
-								</th>
-							</tr>
-						</thead>
-					</table>
+	<div class="main-head">
+		<form th:action="@{/searchsystemparameters}" method="post" modelAttribute="Pagination" autocomplete="off" id="formSearch">
+			<div class="pull-left"><div th:replace="layout/layout_messages :: message"></div></div>
+			<div class="btn-toolbar pull-right">
+				<div class="btn-group">
+			    	<button type="submit" class="btn btn-primary btn-sm" id="search">
+			    		<span class="glyphicon glyphicon-search"></span>
+			    	</button>
+			    </div>
+				<div class="btn-group">
+			        <button type="button" class="btn btn-primary btn-sm" id="clear">
+			        	<span class="glyphicon glyphicon-remove"></span>
+			        </button>
 				</div>
-			</form>
-		</div>
-		<div class="table-responsive main-body">
+				<div class="btn-group">
+		        	<button id="prev" type="button" class="btn btn-primary btn-sm">
+		        		<span class="glyphicon glyphicon-chevron-left"></span>
+		        	</button>
+		        	<input type="hidden" id="page" name="pager.page" class="btn btn-default btn-sm" th:value="${pagination.pager.page}"/>
+		        	<input type="hidden" id="size" name="pager.size" class="btn btn-default btn-sm" th:value="${pagination.pager.size}"/>
+		        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.page}"></button>
+		        	<button type="button" class="btn btn-default btn-sm">
+		        		<span class="glyphicon glyphicon-minus"></span>
+		        	</button>
+		        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.size}"></button>
+		        	<button id="next" type="button" class="btn btn-primary btn-sm">
+		        		<span class="glyphicon glyphicon-chevron-right"></span>
+		        	</button>
+		      	</div>
+		      	<div class="btn-group">
+		        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.length}"></button>
+		      	</div>
+   			</div>
+   			<br/><br/>
+   			<table class="table table-bordred table-striped">
+				<thead>
+					<tr>
+						<th width="20px"><input type="checkbox" id="checkthis"/></th>
+						<th width="200px">
+					        <input name="systemParameters.idSystemParameters" type="text" class="form-control input-sm"
+		                    	th:value="${pagination.systemParameters.idSystemParameters}"
+		                    	placeholder="Search id"/>
+				        </th>
+						<th width="200px">
+					        <input name="systemParameters.value" type="text" class="form-control input-sm" 
+		                    	th:value="${pagination.systemParameters.value}"
+		                    	placeholder="Search value"/>
+						</th>
+						<th width="200px">
+					        <input name="systemParameters.description" type="text" class="form-control input-sm" 
+		                    	th:value="${pagination.systemParameters.description}"
+		                    	placeholder="Search description"/>
+						</th>
+						<th width="200px">
+							<input name="systemParameters.userName" type="text" 
+								class="form-control input-sm"
+								th:value="${pagination.systemParameters.userName}" placeholder="Search user name"/>
+						</th>
+						<th width="200px">
+							<input name="systemParameters.date" type="text" 
+								class="form-control input-sm form_datetime"
+								th:value="${pagination.systemParameters.date}" placeholder="Search date"/>
+						</th>
+						<th width="50px">
+							<input type="text" 
+								class="form-control input-sm"
+								placeholder="Edit" disabled="disabled"/>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</form>
+	</div>
+	<div class="main-body">
+		<div class="table-responsive">
 			<table class="table table-bordred table-striped">
 				<tbody>
 					<tr th:each="s : ${pagination.systemParametersList}">
@@ -102,7 +96,7 @@
 								<div class="input-group-btn">
 									<label data-placement="bottom" data-toggle="tooltip" title="Edit" class="btn-sm eye-button">
 										<span class="glyphicon glyphicon-eye-open"></span>
- 									</label>
+										</label>
 							  	</div>
 							</div>
 						</td>
@@ -123,35 +117,61 @@
 	</div>
 	
 	<!-- Modal systemparameters -->
-	<div class="modal fade" data-backdrop="static" id="systemparametersModal">
+	<div class="modal fade" id="systemparametersModal">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content panel-primary">
+			<div class="modal-content">
 				<div class="modal-header">
-	               <button type="button" class="close" data-dismiss="modal">×</button>
-	               <h4 class="modal-title">Modal Header</h4>
-	            </div>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
 				<div class="modal-body">
-		        	<div class="form-group col-sm-12">
-						<label class="col-sm-3 control-label"
-							title="David Eduardo Marsiglia Ariña">Full Name</label>
-						<div class="col-sm-9">
-							<div class="required-field-block">
-								<input name="fullName" type="text" class="form-control input-sm"
-									placeholder="Your name" />
-								<div class="required-icon">
-									<div class="text">*</div>
-								</div>
+					<div th:replace="layout/layout_messages :: message1"></div>
+					<div class="form-group">
+						<label class="control-label" title="David Eduardo Marsiglia Ariña">Id</label>
+						<div class="required-field-block">
+							<input id="idSystemParameters" type="text" class="form-control input-sm" readonly="readonly"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" title="David Eduardo Marsiglia Ariña">Value</label>
+						<div class="required-field-block">
+							<input id="value" type="text" class="form-control input-sm"/>
+							<div class="required-icon">
+								<div class="text">*</div>
 							</div>
-							<span class="label label-danger">Danger</span>
+							<span id="valueError" class="label label-danger"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" title="David Eduardo Marsiglia Ariña">Description</label>
+						<div class="required-field-block">
+							<textarea id="description" style="resize: none; min-width: 100%; min-height: 50px;"></textarea>
+							<div class="required-icon">
+								<div class="text">*</div>
+							</div>
+							<span id="descriptionError" class="label label-danger"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" title="David Eduardo Marsiglia Ariña">User name</label>
+						<div class="required-field-block">
+							<input id="userName" type="text" class="form-control input-sm" readonly="readonly"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" title="David Eduardo Marsiglia Ariña">Date</label>
+						<div class="required-field-block">
+							<input id="date" type="text" class="form-control input-sm" readonly="readonly"/>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+					<button id="save" type="button" class="btn btn-primary btn-sm">Update</button>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<!-- End modal systemparameters -->
 	
 	<div th:replace="layout/layout_footer :: footer"></div>

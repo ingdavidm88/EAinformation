@@ -16,7 +16,6 @@ import com.example.david.dto.Pagination;
 import com.example.david.model.LogError;
 import com.example.david.repository.LogErrorRepository;
 import com.example.david.service.LogErrorService;
-import com.example.david.service.SystemParametersService;
 
 @Service
 public class LogErrorServiceImpl implements LogErrorService {
@@ -28,14 +27,11 @@ public class LogErrorServiceImpl implements LogErrorService {
 	
 	@Autowired
 	LogErrorRepository logErrorRepository;
-	
-	@Autowired
-	SystemParametersService systemParametersService;
-	
+		
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public void findAll(Pagination pagination) {
+	public void findAll(Pagination pagination, Long pageSize) {
 		StringBuilder sql = new StringBuilder();
 		LogError logError = pagination.getLogError();
 		
@@ -67,7 +63,7 @@ public class LogErrorServiceImpl implements LogErrorService {
     	
     	Query query = manager.createNativeQuery(sql.toString(), LogError.class);
     	
-    	pagination.getPage(query.getResultList().size(), systemParametersService);
+    	pagination.getPage(query.getResultList().size(), pageSize);
     	
     	sql.append("limit ")
     	.append(""+pagination.getPager().getPaginaton()*(Math.abs(pagination.getPager().getPage()-1)))

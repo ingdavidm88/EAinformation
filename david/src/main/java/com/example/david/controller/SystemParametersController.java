@@ -1,18 +1,23 @@
 package com.example.david.controller;
 
+import java.util.ResourceBundle;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.david.dto.Constants;
+import com.example.david.dto.MessageResponse;
 import com.example.david.dto.Pagination;
 import com.example.david.dto.TransactionPage;
 import com.example.david.model.LogError;
@@ -23,9 +28,12 @@ import com.example.david.service.ParentMenuService;
 import com.example.david.service.SystemParametersService;
 import com.example.david.service.UserService;
 import com.example.david.utils.TransactionUtilities;
+import com.example.david.validator.SystemParametersValidator;
 
 @Controller
 public class SystemParametersController {
+	
+	ResourceBundle rb = ResourceBundle.getBundle("messages_en_US");
 	
 	@Autowired
 	UserService userService;
@@ -48,7 +56,8 @@ public class SystemParametersController {
 	public static final String PATTH_SYSTEMPARAMETERS = "/systemparameters";
 	public static final String PATTH_SEARCH = "/searchsystemparameters";
 	public static final String FINDBYSEARCHSYSTEMPARAMETERS = "/findbyidsystemparameters";
-	
+	public static final String SAVESYSTEMPARAMETERS = "/savesystemparameters";
+		
 	@RequestMapping(path = PATTH_SYSTEMPARAMETERS, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		try {
@@ -66,12 +75,11 @@ public class SystemParametersController {
     public String search(
     		Model model,
     		HttpServletRequest request,
-    		@ModelAttribute("Pagination") Pagination pagination,
-    		BindingResult bindingResult) {
+    		@ModelAttribute("Pagination") Pagination pagination) {
 		
         try {
         	transactionPage = transactionUtilities.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
-        	systemParametersService.findAll(pagination);
+        	systemParametersService.findAll(pagination, transactionPage.getPageSize());
         } catch (Exception exception) {
         	model.addAttribute(Constants.MESSAGESRESPONSE.val(), logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH)));
         }
@@ -97,6 +105,35 @@ public class SystemParametersController {
         	logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBYSEARCHSYSTEMPARAMETERS));
         }
         
-        return  ResponseEntity.ok(systemParameters);
+        return ResponseEntity.ok(systemParameters);
+	}
+	
+	@RequestMapping(path = SAVESYSTEMPARAMETERS, method = RequestMethod.POST)
+    public ResponseEntity<MessageResponse> save(
+    		Model model,
+    		HttpServletRequest request,
+    		@Valid @RequestBody SystemParameters systemParameters,
+    		Errors errors) {
+		
+		ValidationUtils.invokeValidator(new SystemParametersValidator(), systemParameters, errors);
+		MessageResponse message = new MessageResponse();
+		
+		try {
+			transactionPage = transactionUtilities.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
+			
+			if(errors.hasErrors()) {
+				message.setErrors(errors.getAllErrors());
+				message.setMessage(rb.getString("error_message"));
+				message.setStatus(Constants.ERROR.val());
+			 }else {
+				 systemParametersService.save(systemParameters);
+				 message.setMessage("success");
+				 message.setStatus(Constants.SUCCESS.val());
+			 }
+		} catch (Exception exception) {
+			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SYSTEMPARAMETERS));
+		}
+		
+		return ResponseEntity.ok(message);
 	}
 }

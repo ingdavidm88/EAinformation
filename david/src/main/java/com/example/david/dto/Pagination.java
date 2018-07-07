@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.example.david.model.LogError;
 import com.example.david.model.SystemParameters;
-import com.example.david.service.SystemParametersService;
 
 public class Pagination {
 	
@@ -24,8 +23,8 @@ public class Pagination {
 		pager = new Pager();
 	}
 	
-	public void getPage(long querySize, SystemParametersService systemParametersService) {
-		this.getPager().setPaginaton(Long.parseLong(systemParametersService.findById(1).getValue()));
+	public void getPage(long querySize, Long pageSize) {
+		this.getPager().setPaginaton(pageSize);
 		long length = querySize;
     	long page = this.getPager().getPage();
     	long size = (long) Math.ceil((double)length/this.getPager().getPaginaton());
