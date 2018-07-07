@@ -8,10 +8,11 @@ $(function () {
     		contentType: "application/json",
     		url: "/david/findbyidsystemparameters",
     		beforeSend: function(xhr){xhr.setRequestHeader(header, token)},
-    		data : JSON.stringify({idSystemParameters : '1'}),
+    		data : JSON.stringify({idSystemParameters : $(this).attr('title')}),
     		dataType: 'json',
     		success: function(response) {
     			$("#idSystemParameters").val(response.idSystemParameters);
+    			$("#name").val(response.name);
     			$("#value").val(response.value);
     			$("#description").val(response.description);
     			$("#userName").val(response.userName);
@@ -24,7 +25,7 @@ $(function () {
     	});
 	});
 	
-	$('#save').click(function () {
+	$('#update').click(function () {
 		$("#load").modal();
 		$("#systemparametersModal").addClass('importantRule');
 		
@@ -36,6 +37,7 @@ $(function () {
     		data : JSON.stringify(
     				{
     					idSystemParameters : $("#idSystemParameters").val(),
+    					name : $("#name").val(),
     					value : $("#value").val(),
     					description : $("#description").val(),
     					userName : $("#userName").val(),
@@ -59,5 +61,9 @@ $(function () {
     		error: function(response) {
     	    }
     	});
+	});
+	
+	$('.closeButton').click(function () {
+		$('#formSearch').submit();	
 	});
 });

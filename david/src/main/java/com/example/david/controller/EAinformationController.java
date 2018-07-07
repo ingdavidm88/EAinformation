@@ -32,6 +32,7 @@ import com.example.david.service.LevelTwoService;
 import com.example.david.service.LogErrorService;
 import com.example.david.service.MenuService;
 import com.example.david.service.ParentMenuService;
+import com.example.david.service.SystemParametersService;
 import com.example.david.service.UserService;
 import com.example.david.utils.TransactionUtilities;
 
@@ -68,6 +69,9 @@ public class EAinformationController {
 	
 	@Autowired
 	LogErrorService logErrorService;
+	
+	@Autowired
+	SystemParametersService systemParametersService;
 	
 	TransactionUtilities transactionUtilities = new TransactionUtilities();
 	TransactionPage transactionPage = new TransactionPage();
@@ -144,6 +148,8 @@ public class EAinformationController {
 		
 		try {
 			transactionPage = transactionUtilities.getTransactionPage(request, PATTH_EAINFORMATION);
+			String numberOfRetries = systemParametersService.findById(2).getValue();
+			String userAgent = systemParametersService.findById(6).getValue();
 			
 			List<LevelOne> levelOneList = levelOneService.findPendingOrFail();
 	        
@@ -154,7 +160,14 @@ public class EAinformationController {
 		        
 		        ThradLevelTwo thradLevelTwo;
 		        for(LevelOne levelOne : levelOneList){
-		        	thradLevelTwo = new ThradLevelTwo(levelOne, levelOneService, levelTwoService);
+		        	thradLevelTwo = new 
+		        			ThradLevelTwo(
+		        					userAgent,
+		        					levelOne, 
+		        					levelOneService, 
+		        					levelTwoService, 
+		        					Integer.parseInt(numberOfRetries));
+		        	
 		        	thradLevelTwo.start();
 		        }
 	        }else {
@@ -176,6 +189,9 @@ public class EAinformationController {
 		
 		try {
 			transactionPage = transactionUtilities.getTransactionPage(request, PATTH_EAINFORMATION);
+			String numberOfRetries = systemParametersService.findById(2).getValue();
+			String numberOfThreads = systemParametersService.findById(3).getValue();
+			String userAgent = systemParametersService.findById(6).getValue();
 			
 			int levelTwoLength = levelTwoService.findPendingOrFail();
 			
@@ -184,7 +200,7 @@ public class EAinformationController {
 		        List<ThradLevelThree> thradLevelThreeList = new ArrayList<>();
 		        ThradLevelThree thradLevelThree;
 		        List<ViewLevelTwo> viewLevelTwoList;
-		        int numberThreads = (levelTwoLength > 40)? Integer.parseInt(Constants.NUMBER_OF_THREADS.val()) : 1;
+		        int numberThreads = (levelTwoLength > 40)? Integer.parseInt(numberOfThreads) : 1;
 		        int from = 0;
 		        int to = (int)Math.ceil((float)levelTwoLength/numberThreads);
 		        boolean valid = true;
@@ -197,7 +213,14 @@ public class EAinformationController {
 		        		valid = false;
 		        	}else {
 		        		progress.setLength(from);
-		        		thradLevelThree = new ThradLevelThree(viewLevelTwoList, levelTwoService, levelThreeService);
+		        		thradLevelThree = new 
+		        				ThradLevelThree(
+		        						userAgent,
+		        						viewLevelTwoList, 
+		        						levelTwoService, 
+		        						levelThreeService, 
+		        						Integer.parseInt(numberOfRetries));
+		        		
 			        	thradLevelThreeList.add(thradLevelThree);
 		        	}
 		        	
@@ -226,6 +249,11 @@ public class EAinformationController {
 		
 		try {
 			transactionPage = transactionUtilities.getTransactionPage(request, PATTH_EAINFORMATION);
+			String numberOfRetries = systemParametersService.findById(2).getValue();
+			String numberOfThreads = systemParametersService.findById(3).getValue();
+			String shippingUsd = systemParametersService.findById(4).getValue();
+			String shippingCop = systemParametersService.findById(5).getValue();
+			String userAgent = systemParametersService.findById(6).getValue();
 			
 			int levelThreeLength = levelThreeService.findPendingOrFail();
 	        
@@ -233,7 +261,7 @@ public class EAinformationController {
 				List<ThradLevelFour> thradLevelFourList = new ArrayList<>();
 				ThradLevelFour thradLevelFour;
 		        List<ViewLevelThree> viewLevelThreeList;
-		        int numberThreads = (levelThreeLength > 40)? Integer.parseInt(Constants.NUMBER_OF_THREADS.val()) : 1;
+		        int numberThreads = (levelThreeLength > 40)? Integer.parseInt(numberOfThreads) : 1;
 		        int from = 0;
 		        int to = (int)Math.ceil((float)levelThreeLength/numberThreads);
 		        boolean valid = true;
@@ -249,7 +277,17 @@ public class EAinformationController {
 		        	}else {
 		        		progress.setLength(from);
 		        		
-		        		thradLevelFour = new ThradLevelFour(viewLevelThreeList, levelThreeService, levelFourService, usdToCop);
+		        		thradLevelFour = new 
+		        				ThradLevelFour(
+		        						userAgent,
+		        						viewLevelThreeList, 
+		        						levelThreeService, 
+		        						levelFourService, 
+		        						usdToCop, 
+		        						Integer.parseInt(numberOfRetries), 
+		        						new BigDecimal(shippingUsd),
+		        						new BigDecimal(shippingCop));
+		        		
 			        	thradLevelFourList.add(thradLevelFour);
 		        	}
 		        	
@@ -278,6 +316,7 @@ public class EAinformationController {
 		
 		try {
 			transactionPage = transactionUtilities.getTransactionPage(request, PATTH_EAINFORMATION);
+			String numberOfThreads = systemParametersService.findById(3).getValue();
 			
 			int levelFourLength = levelFourService.findPendingOrFail();
 	        
@@ -289,7 +328,7 @@ public class EAinformationController {
 				List<ThradLevelFive> thradLevelFiveList = new ArrayList<>();
 				ThradLevelFive thradLevelFive;
 		        List<ViewLevelFour> viewLevelFourList;
-		        int numberThreads = (levelFourLength > 40)? Integer.parseInt(Constants.NUMBER_OF_THREADS.val()) : 1;
+		        int numberThreads = (levelFourLength > 40)? Integer.parseInt(numberOfThreads) : 1;
 		        int from = 0;
 		        int to = (int)Math.ceil((float)levelFourLength/numberThreads);
 		        boolean valid = true;

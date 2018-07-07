@@ -6,13 +6,7 @@ public enum Constants {
 	BASEURL("https://www.amazon.com/"),
     ALPHABET("#,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"),
     REPLACE("[\\|\\*\\/\\?\\\\(\\)\\,\\\\.\\:]"),
-    USERAGENT("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36"),
-    
-    NUMBER_OF_THREADS("300"),
-    NUMBER_OF_RETRIES("20"),
-    
-    SHIPPING_USD("12000"),
-	SHIPPING_COP("10000"),
+
 	PERCENTAGE_GAIN("30"),
 	CURRENCYFORMAT("###,###.##"),
 	

@@ -50,6 +50,11 @@
 		                    	th:value="${pagination.systemParameters.idSystemParameters}"
 		                    	placeholder="Search id"/>
 				        </th>
+				        <th width="200px">
+					        <input name="systemParameters.name" type="text" class="form-control input-sm" 
+		                    	th:value="${pagination.systemParameters.name}"
+		                    	placeholder="Search name"/>
+						</th>
 						<th width="200px">
 					        <input name="systemParameters.value" type="text" class="form-control input-sm" 
 		                    	th:value="${pagination.systemParameters.value}"
@@ -87,13 +92,25 @@
 					<tr th:each="s : ${pagination.systemParametersList}">
 						<td width="20px"><input type="checkbox" class="checkthis" /></td>
 						<td width="200px" th:text="${s.idSystemParameters}"></td>
-						<td width="200px" th:text="${s.value}"></td>
+						<td width="200px" th:text="${s.name}"></td>
+						<td width="200px">
+							<div class="input-group">
+								<input type="text" 
+									class="input-sm ellipsis" 
+									th:value="${s.value}"/>
+								<div class="input-group-btn" th:if="${#strings.length(s.value) > 15}">
+									<label data-placement="bottom" data-toggle="tooltip" title="Edit" class="btn-sm eye-button">
+										<span class="glyphicon glyphicon-eye-open"></span>
+										</label>
+							  	</div>
+							</div>
+						</td>
 						<td width="200px">
 							<div class="input-group">
 								<input type="text" 
 									class="input-sm ellipsis" 
 									th:value="${s.description}"/>
-								<div class="input-group-btn">
+								<div class="input-group-btn" th:if="${#strings.length(s.description) > 15}">
 									<label data-placement="bottom" data-toggle="tooltip" title="Edit" class="btn-sm eye-button">
 										<span class="glyphicon glyphicon-eye-open"></span>
 										</label>
@@ -121,7 +138,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">×</button>
+					<button type="button" class="close closeButton" data-dismiss="modal">×</button>
 					<h4 class="modal-title">Modal Header</h4>
 				</div>
 				<div class="modal-body">
@@ -130,6 +147,12 @@
 						<label class="control-label" title="David Eduardo Marsiglia Ariña">Id</label>
 						<div class="required-field-block">
 							<input id="idSystemParameters" type="text" class="form-control input-sm" readonly="readonly"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" title="David Eduardo Marsiglia Ariña">Name</label>
+						<div class="required-field-block">
+							<input id="name" type="text" class="form-control input-sm" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
@@ -166,8 +189,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
-					<button id="save" type="button" class="btn btn-primary btn-sm">Update</button>
+					<button type="button" class="btn btn-primary btn-sm closeButton" data-dismiss="modal">Close</button>
+					<button id="update" type="button" class="btn btn-primary btn-sm">Update</button>
 				</div>
 			</div>
 		</div>

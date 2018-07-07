@@ -21,6 +21,9 @@ public class SystemParameters implements Serializable {
     @Column(name = "ID_SYSTEM_PARAMETERS", nullable = false)
     private Integer idSystemParameters;
     
+    @Column(name = "NAME", nullable = false)
+    private String name;
+    
     @Lob
     @Column(name = "VALUE", nullable = false)
     private String value;
@@ -38,8 +41,9 @@ public class SystemParameters implements Serializable {
     public SystemParameters() {
 	}
     
-    public SystemParameters(String value, String description, String userName, String date) {
-		this.value = value;
+    public SystemParameters(String name, String value, String description, String userName, String date) {
+    	this.name = name;
+    	this.value = value;
 		this.description = description;
 		this.userName = userName;
 		this.date = date;
@@ -51,6 +55,14 @@ public class SystemParameters implements Serializable {
 
 	public void setIdSystemParameters(Integer idSystemParameters) {
 		this.idSystemParameters = idSystemParameters;
+	}	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getValue() {

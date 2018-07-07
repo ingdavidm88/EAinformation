@@ -41,6 +41,12 @@ public class SystemParametersServiceImpl implements SystemParametersService {
     		   .append("' ");
     	}
     	
+    	if(!systemParameters.getName().equals("")) {
+    		sql.append("and s.NAME = '")
+    		   .append(systemParameters.getName())
+    		   .append("' ");
+    	}
+    	
     	if(!systemParameters.getValue().equals("")) {
     		sql.append("and s.VALUE = '")
     		   .append(systemParameters.getValue())

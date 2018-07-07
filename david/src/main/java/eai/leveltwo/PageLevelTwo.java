@@ -27,10 +27,15 @@ public class PageLevelTwo{
         progress = Progress.getSingletonInstance();
     }
     
-    public void levelTwo(LevelOne levelOne, LevelOneService levelOneService, LevelTwoService levelTwoService){
+    public void levelTwo(
+    		String userAgent,
+    		LevelOne levelOne, 
+    		LevelOneService levelOneService, 
+    		LevelTwoService levelTwoService, 
+    		int numberOfRetries){
     	
 		try {
-			Element firstDiv = page.element(levelOne.getUrl(), "refinementList");
+			Element firstDiv = page.element(levelOne.getUrl(), "refinementList", numberOfRetries, userAgent);
 			
     		if(firstDiv != null){
     			Elements articles = firstDiv.getElementsByClass("a-link-normal");

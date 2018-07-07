@@ -14,17 +14,16 @@ import com.example.david.service.LogErrorService;
 
 public class Page {
 	
-    public Element element(String url, String match){
+    public Element element(String url, String match, int numberOfRetries, String userAgent){
         Element element = null;
         int tries = 0;
-        int numberOfRetries = Integer.parseInt(Constants.NUMBER_OF_RETRIES.val());
         
         while (tries <  numberOfRetries) {
         	try {
         		Document document = 
             			Jsoup
             				.connect(url)
-            				.userAgent(Constants.USERAGENT.val())
+            				.userAgent(userAgent)
             				.get();
         		
         		element = document.getElementById(match);
@@ -62,13 +61,13 @@ public class Page {
     
     public String priceValue(
             BigDecimal usdToCop,
-            String priceUSD){
+            String priceUSD,
+            BigDecimal shippingUsd,
+            BigDecimal shippingCop){
         
     	DecimalFormat formateador = new DecimalFormat(Constants.CURRENCYFORMAT.val());
     	
     	BigDecimal priceCop = new BigDecimal(priceUSD).multiply(usdToCop);
-        BigDecimal shippingUsd = new BigDecimal(Constants.SHIPPING_USD.val());
-        BigDecimal shippingCop = new BigDecimal(Constants.SHIPPING_COP.val());
         BigDecimal percentageGain = new BigDecimal(Constants.PERCENTAGE_GAIN.val());
         BigDecimal gain = priceCop.multiply(percentageGain).divide(new BigDecimal("100"));
         BigDecimal total = priceCop.add(gain).add(shippingUsd).add(shippingCop);

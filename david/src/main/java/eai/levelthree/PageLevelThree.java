@@ -25,12 +25,18 @@ public class PageLevelThree{
         progress = Progress.getSingletonInstance();
     }
     
-    public void levelThree(List<ViewLevelTwo> viewLevelTwoList, LevelTwoService levelTwoService, LevelThreeService levelThreeService){
+    public void levelThree(
+    		String userAgent,
+    		List<ViewLevelTwo> viewLevelTwoList, 
+    		LevelTwoService levelTwoService, 
+    		LevelThreeService levelThreeService, 
+    		int numberOfRetries){
+    	
     	for(ViewLevelTwo viewLevelTwo : viewLevelTwoList){
     		LevelTwo levelTwo = levelTwoService.findOne(viewLevelTwo.getIdLevel2());
     		
     		try {
-    			Element firstDiv = page.element(viewLevelTwo.getUrl(), "rightResultsATF");
+    			Element firstDiv = page.element(viewLevelTwo.getUrl(), "rightResultsATF", numberOfRetries, userAgent);
 	    		List<LevelThree> levelThreeList = new ArrayList<>();
 	    		
 	    		if(firstDiv != null){

@@ -1,13 +1,13 @@
 $(function() {
-	$('.required-icon').tooltip({
-		placement: 'left',
-        title: 'Required field'
-	});
+//	$('.required-icon').tooltip({
+//		placement: 'left',
+//        title: 'Required field'
+//	});
 	
-	$(document).tooltip({
-		selector: "[title]",
-		placement: 'bottom'
-	});
+//	$(document).tooltip({
+//		selector: "[title]",
+//		placement: 'bottom'
+//	});
 	
 	$(".form_datetime").datetimepicker({
 		format: 'yyyy-mm-dd',

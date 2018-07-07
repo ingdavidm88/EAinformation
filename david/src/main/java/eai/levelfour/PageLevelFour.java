@@ -25,16 +25,24 @@ public class PageLevelFour{
         progress = Progress.getSingletonInstance();
     }
     
-    public void levelFour(List<ViewLevelThree> viewLevelThreeList, LevelThreeService levelThreeService, LevelFourService levelFourService, BigDecimal usdToCop){
+    public void levelFour(
+    		String userAgent,
+    		List<ViewLevelThree> viewLevelThreeList, 
+    		LevelThreeService levelThreeService, 
+    		LevelFourService levelFourService, 
+    		BigDecimal usdToCop, 
+    		int numberOfRetries, 
+    		BigDecimal shippingUsd, 
+    		BigDecimal shippingCop){
     	
     	for(ViewLevelThree viewLevelThree : viewLevelThreeList){
     		LevelThree levelThree = levelThreeService.findOne(viewLevelThree.getIdLevel3());
     		
     		try {
-    			Element firstDiv = page.element(viewLevelThree.getUrl()+Constants.ES_US.val(), "ppd");
+    			Element firstDiv = page.element(viewLevelThree.getUrl()+Constants.ES_US.val(), "ppd", numberOfRetries, userAgent);
 	    		
     			if(firstDiv != null){
-	    			data(firstDiv, usdToCop, levelFourService, levelThree, viewLevelThree.getIdLevel3());
+	    			data(firstDiv, usdToCop, levelFourService, levelThree, shippingUsd, shippingCop, viewLevelThree.getIdLevel3());
 	    		}else {
 	    			progress.setCountFail(progress.calculateCountFail());
 	        		levelThree.setStatus(Constants.FAILURE.val());
@@ -48,11 +56,11 @@ public class PageLevelFour{
     	}
     }
     
-    private void data(Element firstDiv, BigDecimal usdToCop, LevelFourService levelFourService, LevelThree levelThree, Integer id) {
+    private void data(Element firstDiv, BigDecimal usdToCop, LevelFourService levelFourService, LevelThree levelThree, BigDecimal shippingUsd, BigDecimal shippingCop, Integer id) {
     	StringBuilder priceUsd = new StringBuilder();
         priceUsd.append(firstDiv.getElementById("priceblock_ourprice") == null ? "0" : firstDiv.getElementById("priceblock_ourprice").text().replaceAll("\\$","").replaceAll("US","").replaceAll(",", ""));
         StringBuilder priceCop = new StringBuilder();
-        priceCop.append(page.priceValue(usdToCop, priceUsd.toString()));
+        priceCop.append(page.priceValue(usdToCop, priceUsd.toString(), shippingUsd, shippingCop));
         
         Element centerCol = firstDiv.getElementById("centerCol");
         Elements ul = centerCol.getElementById("feature-bullets").getElementsByTag("li");
