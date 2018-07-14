@@ -33,7 +33,12 @@ import com.example.david.validator.SystemParametersValidator;
 @Controller
 public class SystemParametersController {
 	
+	MessageResponse message;
+	
 	ResourceBundle rb = ResourceBundle.getBundle("messages_en_US");
+	
+	TransactionUtilities transactionUtilities = new TransactionUtilities();
+	TransactionPage transactionPage = new TransactionPage();
 	
 	@Autowired
 	UserService userService;
@@ -49,9 +54,6 @@ public class SystemParametersController {
 	
 	@Autowired
 	SystemParametersService systemParametersService;
-	
-	TransactionUtilities transactionUtilities = new TransactionUtilities();
-	TransactionPage transactionPage = new TransactionPage();
 		
 	public static final String PATTH_SYSTEMPARAMETERS = "/systemparameters";
 	public static final String PATTH_SEARCH = "/searchsystemparameters";
@@ -80,18 +82,18 @@ public class SystemParametersController {
         try {
         	transactionPage = transactionUtilities.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
         	systemParametersService.findAll(pagination, transactionPage.getPageSize());
+        	
+            model.addAttribute("tp", transactionPage);
+            model.addAttribute("pagination", pagination);
         } catch (Exception exception) {
         	model.addAttribute(Constants.MESSAGESRESPONSE.val(), logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH)));
         }
-        
-        model.addAttribute("pagination", pagination);
-        model.addAttribute("tp", transactionPage);
         
         return  PATTH_SYSTEMPARAMETERS;
 	}
 	
 	@RequestMapping(path = FINDBYSEARCHSYSTEMPARAMETERS, method = RequestMethod.POST)
-    public ResponseEntity<SystemParameters> findByIdsystemParameters(
+    public ResponseEntity<Object> findByIdsystemParameters(
     		Model model, 
     		HttpServletRequest request,
     		@RequestBody SystemParameters idSystemParameters) {
@@ -102,21 +104,22 @@ public class SystemParametersController {
         	transactionPage = transactionUtilities.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
         	systemParameters = systemParametersService.findById(idSystemParameters.getIdSystemParameters());
         } catch (Exception exception) {
-        	logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBYSEARCHSYSTEMPARAMETERS));
+        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBYSEARCHSYSTEMPARAMETERS));
+        	return ResponseEntity.badRequest().body(message);
         }
         
         return ResponseEntity.ok(systemParameters);
 	}
 	
 	@RequestMapping(path = SAVESYSTEMPARAMETERS, method = RequestMethod.POST)
-    public ResponseEntity<MessageResponse> save(
+    public ResponseEntity<Object> save(
     		Model model,
     		HttpServletRequest request,
     		@Valid @RequestBody SystemParameters systemParameters,
     		Errors errors) {
 		
 		ValidationUtils.invokeValidator(new SystemParametersValidator(), systemParameters, errors);
-		MessageResponse message = new MessageResponse();
+		message = new MessageResponse();
 		
 		try {
 			transactionPage = transactionUtilities.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
@@ -132,6 +135,7 @@ public class SystemParametersController {
 			 }
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SYSTEMPARAMETERS));
+			return ResponseEntity.badRequest().body(message);
 		}
 		
 		return ResponseEntity.ok(message);

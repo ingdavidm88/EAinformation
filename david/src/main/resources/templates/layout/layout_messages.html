@@ -9,7 +9,7 @@
 		<br style="margin-bottom: 5px;"/>
 	</div>
 	
-	<div th:fragment="message1" id="message1">
+	<div th:fragment="messageAjax" id="messageAjax">
 		<span class="label label-danger danger"></span>
 		<span class="label label-success success"></span>
 		<br style="margin-bottom: 5px;"/>
@@ -43,10 +43,6 @@
 		<div class="modal fade" data-backdrop="static" id="showText">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content panel-primary">
-					<div class="modal-header">
-		               <button type="button" class="close" data-dismiss="modal">×</button>
-		               <h4 class="modal-title">Modal Header</h4>
-		            </div>
 					<div class="modal-body">
 			        	<textarea readonly="readonly" id="error" style="resize: none; min-width: 100%; min-height: 300px;"></textarea>
 					</div>
@@ -60,24 +56,37 @@
 	<!-- End modal showText -->
 	
 	<!-- Modal load -->
-	<div th:fragment="load">
-		<div class="modal fade" data-backdrop="static" id="load">
-			<div class="modal-dialog" role="document">
-				<div class="loader">
-	                <div class="loader-inner-1"></div>
-	                <div class="loader-inner-2"></div>
-	                <div class="loader-inner-3"></div>
-	                <div class="loader-inner-4"></div>
-	                <div class="loader-inner-5"></div>
-	                <div class="loader-inner-6"></div>
-	                <div class="loader-inner-7"></div>
-	                <div class="loader-inner-8"></div>
-	                <div class="loader-inner-9"></div>
-	                <div class="loader-inner-10"></div>
-	            </div>
+	<div th:fragment="modalLoad">
+		<div class="load" id="modalLoad" style="display: none;">
+			<div class="loader">
+   				<div class="face face1">
+       				<div class="circle"></div>
+       			</div>
+   				<div class="face face2">
+       				<div class="circle"></div>
+   				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End modal errorAjax -->
+	<!-- End modal load -->
+	
+	<!-- body load -->
+	<div th:fragment="bodyLoad">
+		<div class="modal fade" data-backdrop="static" id="bodyLoad">
+			<div class="modal-dialog" role="document">
+				<div class="load" style="margin: 50% 0;">
+					<div class="loader">
+		   				<div class="face face1">
+		       				<div class="circle"></div>
+		       			</div>
+		   				<div class="face face2">
+		       				<div class="circle"></div>
+		   				</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End modal body load -->
 </body>
 </html>

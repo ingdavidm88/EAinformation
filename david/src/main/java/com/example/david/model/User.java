@@ -44,7 +44,7 @@ public class User implements Serializable, UserDetails {
     private Role role;
     
     @JoinColumn(name = "ID_USER_DETAIL", referencedColumnName = "ID_USER_DETAIL")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private UserDetail userDetail;
 
     public User() {

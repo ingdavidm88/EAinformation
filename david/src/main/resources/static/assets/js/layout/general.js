@@ -1,11 +1,7 @@
 $(function() {
-//	$('.required-icon').tooltip({
-//		placement: 'left',
-//        title: 'Required field'
-//	});
-	
-//	$(document).tooltip({
-//		selector: "[title]",
+//	$('[data-toggle="popover"]').popover({
+//		trigger: 'click',
+//		container: 'body',
 //		placement: 'bottom'
 //	});
 	
@@ -15,10 +11,6 @@ $(function() {
 		minView: 2
 	});
 	
-	$(".expiredButton").click(function () {
-		$(location ).attr("href", "/david/signin");
-	});
-
 	$("#menu-toggle").click(function(e){
 		$("#sidebar-wrapper").toggleClass("active",true);		
 		e.preventDefault();
@@ -28,14 +20,32 @@ $(function() {
 		$('#sidebar-wrapper').toggleClass('active',false);		
 		e.stopPropagation();	
 		e.preventDefault();										
-	});
+	});	
 	
+	/***************** Load **********************/
 	$("body").submit(function(){
-		$("#load").modal();
+		$("#bodyLoad").modal();
 	});
 	
+	$('.evetMenu').click(function(){
+		$("#bodyLoad").modal();
+	});
+	/***************** Edn Load **********************/
+	
+	
+	/***************** Pagination **********************/
 	$('#search').click(function () {
     	$('#formSearch').submit();
+    });	
+	
+	$('#firstPage').click(function () {
+		var page = parseInt($('#page').val());
+		var newPage = 1;
+		
+		if(page > newPage){
+			$('#page').val(newPage);
+			$('#formSearch').submit();
+		}
     });
 	
 	$('#prev').click(function () {
@@ -59,6 +69,16 @@ $(function() {
 		}
     });
 	
+	$('#lastPage').click(function () {
+		var page = parseInt($('#page').val());
+		var size = parseInt($('#size').val());
+		
+		if(page < size){
+			$('#page').val(size);
+			$('#formSearch').submit();
+		}
+    });
+	
 	$('#clear').click(function () {
     	$('.main-head table input').val('');
     });
@@ -67,4 +87,9 @@ $(function() {
 		$("#showText").find("#error").val($(this).parent().parent().find('input').val());
 		$("#showText").modal();
 	});
+	
+	$('.closeButton').click(function () {
+		$('#formSearch').submit();	
+	});
+	/***************** End pagination **********************/
 });

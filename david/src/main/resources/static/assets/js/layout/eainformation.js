@@ -62,7 +62,7 @@ $(function () {
     				$("#errorAjax").find("#error").text(response.responseJSON.message);
     				$("#errorAjax").modal();
     			}else{
-    				$("#expiredSession").modal();
+    				$(location ).attr("href", "/david/signin");
     			}
     	    }
     	});

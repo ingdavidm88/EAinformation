@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.david.dto.Constants;
+import com.example.david.dto.MessageResponse;
 import com.example.david.dto.Pagination;
 import com.example.david.dto.TransactionPage;
 import com.example.david.model.LogError;
@@ -23,6 +24,11 @@ import com.example.david.utils.TransactionUtilities;
 @Controller
 public class LogErrorController {
 	
+	MessageResponse message;
+	
+	TransactionUtilities transactionUtilities = new TransactionUtilities();
+	TransactionPage transactionPage = new TransactionPage();
+	
 	@Autowired
 	UserService userService;
 	
@@ -34,9 +40,6 @@ public class LogErrorController {
 	
 	@Autowired
 	LogErrorService logErrorService;
-	
-	TransactionUtilities transactionUtilities = new TransactionUtilities();
-	TransactionPage transactionPage = new TransactionPage();
 		
 	public static final String PATTH_LOGERROR = "/logerror";
 	public static final String PATTH_SEARCH = "/searchlogerror";
@@ -65,11 +68,12 @@ public class LogErrorController {
         	transactionPage = transactionUtilities.getTransactionPage(request, PATTH_LOGERROR);
         	logErrorService.findAll(pagination, transactionPage.getPageSize());
         } catch (Exception exception) {
-        	model.addAttribute(Constants.MESSAGESRESPONSE.val(), logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH)));
+        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH));
         }
-        
-        model.addAttribute("pagination", pagination);
-        model.addAttribute("tp", transactionPage);
+                
+    	model.addAttribute("tp", transactionPage); 
+    	model.addAttribute("pagination", pagination); 
+        model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
         
         return  PATTH_LOGERROR;
 	}

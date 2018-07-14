@@ -3,6 +3,8 @@ $(function () {
 	var token = $("meta[name='csrf']").attr("content");
 	
 	$('.edit').click(function () {
+		$('#messageAjax').find('.success, .danger').text('');
+		
 		$.ajax({
     		type: "POST",
     		contentType: "application/json",
@@ -21,16 +23,22 @@ $(function () {
     			$("#systemparametersModal").modal();
     		},
     		error: function(response) {
+    			if(response.responseJSON){
+    				$('#messageAjax').find('.danger').text(response.responseJSON.message);
+    				$("#systemparametersModal").modal();
+    			}else{
+    				$(location ).attr("href", "/david/signin");
+    			}
     	    }
     	});
 	});
 	
 	$('#update').click(function () {
-		$("#load").modal();
-		$("#systemparametersModal").addClass('importantRule');
+		$('#messageAjax').find('.success, .danger').text('');
+		$('#modalLoad').css('display' , 'block');
 		
 		$.ajax({
-    		type: "POST",
+			type: "POST",
     		contentType: "application/json",
     		url: "/david/savesystemparameters",
     		beforeSend: function(xhr){xhr.setRequestHeader(header, token)},
@@ -45,25 +53,25 @@ $(function () {
     				}),
     		dataType: 'json',
     		success: function(response) {
-    			 $("#save").prop("disabled", false);
-    			 $("#systemparametersModal").removeClass('importantRule');
-    			 $('#load').modal('hide');
+    			$('#modalLoad').css('display' , 'none');
     			 
-    			 if(response.errors){
-    				 $('#message1').find('.danger').text(response.message);
-    				 for (var i = 0; i < response.errors.length; i++) {
-    					 $('#'+response.errors[i].field+"Error").text(response.errors[i].code);
-    				 }
-    			 }else{
-    				 $('#message1').find('.success').text(response.message);
-    			 }    			 
+    			if(response.errors){
+    				$('#messageAjax').find('.danger').text(response.message);
+    				for (var i = 0; i < response.errors.length; i++) {
+    					$('#'+response.errors[i].field+"Error").text(response.errors[i].code);
+    				}
+    			}else{
+    				$('#messageAjax').find('.success').text(response.message);
+    			}    			 
     		},
     		error: function(response) {
-    	    }
+    			$('#modalLoad').css('display' , 'none');
+    			if(response.responseJSON){
+    				$('#messageAjax').find('.danger').text(response.responseJSON.message);
+    			}else{
+    				$(location ).attr("href", "/david/signin");
+    			}
+    		}
     	});
-	});
-	
-	$('.closeButton').click(function () {
-		$('#formSearch').submit();	
 	});
 });

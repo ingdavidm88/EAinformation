@@ -19,6 +19,13 @@ public class UserDetailServiceImpl implements UserDetailService {
     
     @Autowired
     private UserRepository userRepository;
+    
+
+	@Override
+	@Transactional
+	public UserDetail findByUserDetail(Integer idUserDetail) {
+		return userDetailRepository.findOne(idUserDetail);
+	}
 
     @Override
     @Transactional
@@ -40,5 +47,4 @@ public class UserDetailServiceImpl implements UserDetailService {
 
         return userDetail;
     }
-
 }

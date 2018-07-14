@@ -26,6 +26,8 @@ import com.example.david.validator.UserDetailValidator;
 @Controller
 public class SignUpController {
 	
+	MessageResponse message;
+	
 	@Autowired
 	LogErrorService logErrorService;
 	
@@ -46,7 +48,7 @@ public class SignUpController {
     public String page(Model model) {
 		try {
 			model.addAttribute("UserDetail", new UserDetail());
-	    } catch (Exception exception) {
+		} catch (Exception exception) {
 			logErrorService.save(new LogError(exception, "N/A", PATTH_SIGNUP));
 	    }
 		
@@ -60,7 +62,7 @@ public class SignUpController {
     		BindingResult bindingResult) {
 		
 		try {
-			MessageResponse message = new MessageResponse();
+			message = new MessageResponse();
 			
 			if (bindingResult.hasErrors()) {
 				for(FieldError error : bindingResult.getFieldErrors()){
@@ -75,12 +77,13 @@ public class SignUpController {
 						 
 				 userDetailService.saveUserDetail(userDetail);
 			 }
-			
-			model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
+						
 			model.addAttribute("UserDetail", userDetail);
 		} catch (Exception exception) {
-			logErrorService.save(new LogError(exception, "N/A", PATTH_REGISTRATION));
+			message = logErrorService.save(new LogError(exception, "N/A", PATTH_REGISTRATION));
 		}
+		
+		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
 		return  PATTH_SIGNUP;
 	}

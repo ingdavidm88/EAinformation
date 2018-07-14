@@ -1,5 +1,5 @@
-.importantRule{
-    z-index: 1040 !important;
+th{
+	padding: 5px;
 }
 
 /* modal-header */
@@ -16,15 +16,30 @@
 	height: 12%;
 	background: #F0F4F5;
 	padding-top: 10px;
-	padding-right: 20px;
+	padding-right: 16px;
 	border: 2px solid #ddd;
 }
 
 .main-body{
 	position: absolute;
 	width: 100%;
-	height: 80%;
-	overflow: scroll;
+	height: 74.5%;
+	overflow-x: auto;
+	overflow-y: scroll;
+}
+
+.main-body1{
+	position: absolute;
+	width: 100%;
+	height: 91.4%;
+	overflow: auto;
+}
+
+.main-body2{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 }
 /*end main*/
 
@@ -133,9 +148,6 @@
 /* end box  div and hr  border */
 
 /* replace */
-.btn-toolbar{
-	padding-right: 9px;
-}
 
 .table > thead > tr > th{
 	border: none;
@@ -472,5 +484,3 @@
   }
 }
 /* end make sidebar nav vertical */
-
-

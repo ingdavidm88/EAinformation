@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.david.dto.TransactionPage;
 import com.example.david.model.LogError;
+import com.example.david.model.User;
+import com.example.david.model.UserDetail;
 import com.example.david.service.LogErrorService;
 import com.example.david.service.MenuService;
 import com.example.david.service.ParentMenuService;
@@ -40,6 +42,14 @@ public class ProfileController {
     public String page(Model model, HttpServletRequest request) {
 		try {
 			transactionPage = transactionUtilities.getTransactionPage(request, PATTH_PROFILE);
+			
+			User user = userService.findByUserName(transactionPage.getUserName());
+
+			UserDetail userDetail = user.getUserDetail();
+			userDetail.setUserName(user.getUsername());
+			userDetail.setRepeatPassword(user.getRole().getName());
+			
+			model.addAttribute("userDetail", userDetail);
 			model.addAttribute("tp", transactionPage);
 		} catch (Exception exception) {
 			logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_PROFILE));

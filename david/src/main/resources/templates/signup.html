@@ -5,123 +5,121 @@
 <link rel="stylesheet" th:href="@{/assets/css/layout/signup.css}" />
 </head>
 <body style="background-image: url('../david/assets/images/1.jpg'); background-attachment: fixed;">
-	<div class="form-panel box">
-		<div class="table-responsive main-body1">
-			<div class="col-sm-3"></div>
-			<div class="col-sm-6">
-				<form th:action="@{/registration}" method="post"
-					modelAttribute="UserDetail" autocomplete="off">
-					<h3 class="text-right-xs">Sign up</h3>
-					<p class="text-muted text-right-xs">Please fill out the form
-						below to create a new account.</p>
-					<div th:replace="layout/layout_messages :: message"></div>
-					<hr class="boxhr5" />
-					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Full Name</label>
-						<div class="required-field-block">
-							<input name="fullName" type="text" class="form-control input-sm"
-								th:value="${UserDetail.fullName}"
-								placeholder="Your name" />
-							<div class="required-icon">
-								<div class="text">*</div>
-							</div>
+	<div class="box main-body2">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6">
+			<form th:action="@{/registration}" method="post"
+				modelAttribute="UserDetail" autocomplete="off">
+				<h3 class="text-right-xs">Sign up</h3>
+				<p class="text-muted text-right-xs">Please fill out the form
+					below to create a new account.</p>
+				<div th:replace="layout/layout_messages :: message"></div>
+				<hr class="boxhr5" />
+				<div class="form-group">
+					<label class="control-label">Full Name</label>
+					<div class="required-field-block">
+						<input name="fullName" type="text" class="form-control input-sm"
+							th:value="${UserDetail.fullName}"
+							placeholder="Your name" />
+						<div class="required-icon">
+							<div class="text">*</div>
 						</div>
-						<span th:if="${fullName != null}" th:text="${fullName}"
+					</div>
+					<span th:if="${fullName != null}" th:text="${fullName}"
+						class="label label-danger"></span>
+				</div>
+	
+				<div class="form-group">
+					<label class="control-label">Username</label>
+					<div class="required-field-block">
+						<input name="userName" type="text" class="form-control input-sm"
+							th:value="${UserDetail.userName}"
+							placeholder="Username" />
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<span th:if="${userName != null}" th:text="${userName}"
+						class="label label-danger"></span>
+				</div>
+	
+				<div class="form-group">
+					<label class="control-label">Date of Birth</label>
+					<div class="required-field-block">
+						<input name="birth" type="text"
+							class="form-control input-sm form_datetime" 
+							th:value="${UserDetail.birth}"
+							placeholder="Date of Birth"/>
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<span th:if="${birth != null}" th:text="${birth}"
+						class="label label-danger"></span>
+				</div>
+	
+				<div class="form-group">
+					<label class="control-label">Email address</label>
+					<div class="required-field-block">
+						<input name="email" type="text" class="form-control input-sm"
+							th:value="${UserDetail.email}"
+							placeholder="Enter email" />
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<span th:if="${email != null}" th:text="${email}"
+						class="label label-danger"></span>
+				</div>
+	
+				<div class="form-group">
+					<label class="control-label">Password</label>
+					<div class="required-field-block">
+						<input name="password" type="password"
+							class="form-control input-sm" placeholder="Password" />
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<span th:if="${password != null}" th:text="${password}"
+						class="label label-danger"></span>
+				</div>
+	
+				<div class="form-group">
+					<label class="control-label">Repeat password</label>
+					<div class="required-field-block">
+						<input name="repeatPassword" type="password"
+							class="form-control input-sm" placeholder="Repeat password" />
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<span th:if="${repeatPassword != null}" t="${repeatPassword}"
+						class="label label-danger"></span>
+				</div>
+	
+				<div class="form-group">
+					<div class="form-group">
+						<input name="privacyPolicy" type="checkbox" />   <label
+							for="terms">I agree with the <a>terms and conditions</a>
+							for Registration.
+						</label> <span class="req">* </span> <span
+							th:if="${privacyPolicy != null}" th:text="${privacyPolicy}"
 							class="label label-danger"></span>
 					</div>
-		
-					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Username</label>
-						<div class="required-field-block">
-							<input name="userName" type="text" class="form-control input-sm"
-								th:value="${UserDetail.userName}"
-								placeholder="Username" />
-							<div class="required-icon">
-								<div class="text">*</div>
-							</div>
-						</div>
-						<span th:if="${userName != null}" th:text="${userName}"
-							class="label label-danger"></span>
-					</div>
-		
-					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Date of Birth</label>
-						<div class="required-field-block">
-							<input name="birth" type="text"
-								class="form-control input-sm form_datetime" 
-								th:value="${UserDetail.birth}"
-								placeholder="Date of Birth"/>
-							<div class="required-icon">
-								<div class="text">*</div>
-							</div>
-						</div>
-						<span th:if="${birth != null}" th:text="${birth}"
-							class="label label-danger"></span>
-					</div>
-		
-					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Email address</label>
-						<div class="required-field-block">
-							<input name="email" type="text" class="form-control input-sm"
-								th:value="${UserDetail.email}"
-								placeholder="Enter email" />
-							<div class="required-icon">
-								<div class="text">*</div>
-							</div>
-						</div>
-						<span th:if="${email != null}" th:text="${email}"
-							class="label label-danger"></span>
-					</div>
-		
-					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Password</label>
-						<div class="required-field-block">
-							<input name="password" type="password"
-								class="form-control input-sm" placeholder="Password" />
-							<div class="required-icon">
-								<div class="text">*</div>
-							</div>
-						</div>
-						<span th:if="${password != null}" th:text="${password}"
-							class="label label-danger"></span>
-					</div>
-		
-					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Repeat password</label>
-						<div class="required-field-block">
-							<input name="repeatPassword" type="password"
-								class="form-control input-sm" placeholder="Repeat password" />
-							<div class="required-icon">
-								<div class="text">*</div>
-							</div>
-						</div>
-						<span th:if="${repeatPassword != null}" t="${repeatPassword}"
-							class="label label-danger"></span>
-					</div>
-		
-					<div class="form-group">
-						<div class="form-group">
-							<input name="privacyPolicy" type="checkbox" />   <label
-								for="terms">I agree with the <a>terms and conditions</a>
-								for Registration.
-							</label> <span class="req">* </span> <span
-								th:if="${privacyPolicy != null}" th:text="${privacyPolicy}"
-								class="label label-danger"></span>
-						</div>
-					</div>
-		
-					<div class="form-group text-right">
-						<button class="btn btn-primary btn-sm" type="submit">Create
-							an account</button>
-						<a class="btn btn-primary btn-sm" href="/david/index"> <span
-							class="glyphicon glyphicon-home" aria-hidden="true"></span> Take me
-							sign in
-						</a>
-					</div>
-				</form>
-			</div>
-			<div class="col-sm-3"></div>
+				</div>
+	
+				<div class="form-group text-right">
+					<button class="btn btn-primary btn-sm" type="submit">Create
+						an account</button>
+					<a class="btn btn-primary btn-sm" href="/david/signin"> <span
+						class="glyphicon glyphicon-home" aria-hidden="true"></span> Take me
+						sign in
+					</a>
+				</div>
+			</form>
 		</div>
+		<div class="col-sm-3"></div>
 	</div>
 
 	<div th:replace="layout/layout_resources :: scripts"></div>

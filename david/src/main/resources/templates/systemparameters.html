@@ -3,13 +3,15 @@
 <head>
 	<head th:replace="layout/layout_resources :: head"></head>
 </head>
-<body style="background-attachment: fixed; overflow: hidden;">
+<body style="background-image: url('../david/assets/images/1.jpg'); background-attachment: fixed; overflow: hidden;">
 	<div th:replace="layout/layout_horizontal_menu :: h-nav"></div>
 	<div th:replace="layout/layout_vertical_menu :: v-nav"></div>
 	
 	<div class="main-head">
 		<form th:action="@{/searchsystemparameters}" method="post" modelAttribute="Pagination" autocomplete="off" id="formSearch">
-			<div class="pull-left"><div th:replace="layout/layout_messages :: message"></div></div>
+			<div class="pull-left">
+				<div th:replace="layout/layout_messages :: message"></div>
+			</div>
 			<div class="btn-toolbar pull-right">
 				<div class="btn-group">
 			    	<button type="submit" class="btn btn-primary btn-sm" id="search">
@@ -22,7 +24,13 @@
 			        </button>
 				</div>
 				<div class="btn-group">
-		        	<button id="prev" type="button" class="btn btn-primary btn-sm">
+		        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.length}"></button>
+		      	</div>
+				<div class="btn-group">
+					<button id="firstPage" type="button" class="btn btn-primary btn-sm">
+		        		<span class="glyphicon glyphicon-step-backward"></span>
+		        	</button>
+		       		<button id="prev" type="button" class="btn btn-primary btn-sm">
 		        		<span class="glyphicon glyphicon-chevron-left"></span>
 		        	</button>
 		        	<input type="hidden" id="page" name="pager.page" class="btn btn-default btn-sm" th:value="${pagination.pager.page}"/>
@@ -35,47 +43,46 @@
 		        	<button id="next" type="button" class="btn btn-primary btn-sm">
 		        		<span class="glyphicon glyphicon-chevron-right"></span>
 		        	</button>
-		      	</div>
-		      	<div class="btn-group">
-		        	<button type="button" class="btn btn-default btn-sm" th:text="${pagination.pager.length}"></button>
-		      	</div>
+		      		<button id="lastPage" type="button" class="btn btn-primary btn-sm">
+		        		<span class="glyphicon glyphicon-step-forward"></span>
+		        	</button>
+		        </div>
    			</div>
    			<br/><br/>
    			<table class="table table-bordred table-striped">
 				<thead>
 					<tr>
-						<th width="20px"><input type="checkbox" id="checkthis"/></th>
-						<th width="200px">
+						<th width="14%">
 					        <input name="systemParameters.idSystemParameters" type="text" class="form-control input-sm"
 		                    	th:value="${pagination.systemParameters.idSystemParameters}"
 		                    	placeholder="Search id"/>
 				        </th>
-				        <th width="200px">
+				        <th width="14%">
 					        <input name="systemParameters.name" type="text" class="form-control input-sm" 
 		                    	th:value="${pagination.systemParameters.name}"
 		                    	placeholder="Search name"/>
 						</th>
-						<th width="200px">
+						<th width="16%">
 					        <input name="systemParameters.value" type="text" class="form-control input-sm" 
 		                    	th:value="${pagination.systemParameters.value}"
 		                    	placeholder="Search value"/>
 						</th>
-						<th width="200px">
+						<th width="20%">
 					        <input name="systemParameters.description" type="text" class="form-control input-sm" 
 		                    	th:value="${pagination.systemParameters.description}"
 		                    	placeholder="Search description"/>
 						</th>
-						<th width="200px">
+						<th width="14%">
 							<input name="systemParameters.userName" type="text" 
 								class="form-control input-sm"
 								th:value="${pagination.systemParameters.userName}" placeholder="Search user name"/>
 						</th>
-						<th width="200px">
+						<th width="14%">
 							<input name="systemParameters.date" type="text" 
 								class="form-control input-sm form_datetime"
 								th:value="${pagination.systemParameters.date}" placeholder="Search date"/>
 						</th>
-						<th width="50px">
+						<th width="8%">
 							<input type="text" 
 								class="form-control input-sm"
 								placeholder="Edit" disabled="disabled"/>
@@ -85,42 +92,52 @@
 			</table>
 		</form>
 	</div>
-	<div class="main-body">
+	<div class="box main-body">
 		<div class="table-responsive">
 			<table class="table table-bordred table-striped">
 				<tbody>
 					<tr th:each="s : ${pagination.systemParametersList}">
-						<td width="20px"><input type="checkbox" class="checkthis" /></td>
-						<td width="200px" th:text="${s.idSystemParameters}"></td>
-						<td width="200px" th:text="${s.name}"></td>
-						<td width="200px">
+						<td width="14%" th:text="${s.idSystemParameters}"></td>
+						<td width="14%">
+							<div class="input-group">
+								<input type="text" 
+									class="input-sm ellipsis" 
+									th:value="${s.name}"/>
+								<div class="input-group-btn" th:if="${#strings.length(s.name) > 20}">
+									<label data-placement="bottom" data-toggle="tooltip" title="Edit" class="btn-sm eye-button">
+										<span class="glyphicon glyphicon-eye-open"></span>
+ 									</label>
+							  	</div>
+							</div>
+						</td>
+						<td width="16%">
 							<div class="input-group">
 								<input type="text" 
 									class="input-sm ellipsis" 
 									th:value="${s.value}"/>
-								<div class="input-group-btn" th:if="${#strings.length(s.value) > 15}">
+								<div class="input-group-btn" th:if="${#strings.length(s.value) > 20}">
 									<label data-placement="bottom" data-toggle="tooltip" title="Edit" class="btn-sm eye-button">
 										<span class="glyphicon glyphicon-eye-open"></span>
-										</label>
+ 									</label>
 							  	</div>
 							</div>
 						</td>
-						<td width="200px">
+						<td width="20%">
 							<div class="input-group">
 								<input type="text" 
 									class="input-sm ellipsis" 
 									th:value="${s.description}"/>
-								<div class="input-group-btn" th:if="${#strings.length(s.description) > 15}">
+								<div class="input-group-btn" th:if="${#strings.length(s.description) > 20}">
 									<label data-placement="bottom" data-toggle="tooltip" title="Edit" class="btn-sm eye-button">
 										<span class="glyphicon glyphicon-eye-open"></span>
-										</label>
+ 									</label>
 							  	</div>
 							</div>
 						</td>
-						<td width="200px" th:text="${s.userName}"></td>
-						<td width="200px" th:text="${s.date}"></td>
-						<td width="50px">
-							<button type="button" class="btn btn-primary btn-sm edit" th:title="${s.idSystemParameters}">
+						<td width="14%" th:text="${s.userName}"></td>
+						<td width="14%" th:text="${s.date}"></td>
+						<td width="8%">
+							<button type="button" class="btn btn-primary btn-sm edit pull-right" th:title="${s.idSystemParameters}">
 				        		<span class="glyphicon glyphicon-pencil"></span>
 				        	</button>
 				        </td>
@@ -134,29 +151,30 @@
 	</div>
 	
 	<!-- Modal systemparameters -->
-	<div class="modal fade" id="systemparametersModal">
+	<div class="modal fade" data-backdrop="static" id="systemparametersModal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
+				<div th:replace="layout/layout_messages :: modalLoad"></div>
 				<div class="modal-header">
 					<button type="button" class="close closeButton" data-dismiss="modal">×</button>
-					<h4 class="modal-title">Modal Header</h4>
+					<h4 class="modal-title" th:text="${tp.title}"></h4>
 				</div>
 				<div class="modal-body">
-					<div th:replace="layout/layout_messages :: message1"></div>
+					<div th:replace="layout/layout_messages :: messageAjax"></div>
 					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Id</label>
+						<label class="control-label">Id</label>
 						<div class="required-field-block">
 							<input id="idSystemParameters" type="text" class="form-control input-sm" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Name</label>
+						<label class="control-label">Name</label>
 						<div class="required-field-block">
 							<input id="name" type="text" class="form-control input-sm" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Value</label>
+						<label class="control-label">Value</label>
 						<div class="required-field-block">
 							<input id="value" type="text" class="form-control input-sm"/>
 							<div class="required-icon">
@@ -166,7 +184,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Description</label>
+						<label class="control-label">Description</label>
 						<div class="required-field-block">
 							<textarea id="description" style="resize: none; min-width: 100%; min-height: 50px;"></textarea>
 							<div class="required-icon">
@@ -176,20 +194,20 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">User name</label>
+						<label class="control-label">User name</label>
 						<div class="required-field-block">
 							<input id="userName" type="text" class="form-control input-sm" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" title="David Eduardo Marsiglia Ariña">Date</label>
+						<label class="control-label">Date</label>
 						<div class="required-field-block">
 							<input id="date" type="text" class="form-control input-sm" readonly="readonly"/>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-sm closeButton" data-dismiss="modal">Close</button>
+					<button  class="btn btn-primary btn-sm closeButton" data-dismiss="modal">Close</button>
 					<button id="update" type="button" class="btn btn-primary btn-sm">Update</button>
 				</div>
 			</div>

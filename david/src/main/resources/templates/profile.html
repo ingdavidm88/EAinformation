@@ -7,12 +7,59 @@
 	<div th:replace="layout/layout_horizontal_menu :: h-nav"></div>
 	<div th:replace="layout/layout_vertical_menu :: v-nav"></div>
 	
-	<div class="col-sm-12 box form-panel">
-		<div class="table-responsive main-body1">
-			Hola
-		</div>
+	<div class="box main-body1">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8" style="margin-top: 5%;">
+			<div class="col-sm-4">
+				<img src="../david/assets/images/user.jpg" id="profile-image1" class="img-circle img-responsive"/> 
+				<br/>
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button id="fake-file-button-browse" type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-file"></span>
+						</button>
+					</span>
+					<input type="file" id="files-input-upload" style="display:none"/>
+					<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control"/>
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" disabled="disabled" id="fake-file-button-upload">
+							<span class="glyphicon glyphicon-upload"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div>
+					<h2 th:text="${userDetail.fullName}"></h2>
+					<p>an <b th:text="${userDetail.repeatPassword}"></b></p>
+				</div>
+				<hr/>
+				<ul class="details" >
+					<li>
+						<p>
+							<span class="glyphicon glyphicon-user one" style="width:50px;"></span>
+							<label th:text="${userDetail.userName}"></label>
+						</p>
+					</li>
+                    <li>
+                    	<p>
+                    		<span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>
+                    		<label th:text="${userDetail.email}"></label>
+                    	</p>
+                    </li>
+                    <li>
+                    	<p>
+                    		<span class="glyphicon glyphicon-calendar one" style="width:50px;"></span>
+                    		<label th:text="${userDetail.birth}"></label>
+                    	</p>
+                    </li>
+				</ul>
+			</div>
+        </div>
+		<div class="col-sm-2"></div>
 	</div>
 	
 	<div th:replace="layout/layout_resources :: scripts"></div>
+	<script type="text/javascript" th:src="@{/assets/js/layout/profile.js}"></script>
 </body>
 </html>

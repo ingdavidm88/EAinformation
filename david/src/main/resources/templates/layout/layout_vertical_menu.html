@@ -18,7 +18,7 @@
 						<ul class="sub-menu collapse" th:id="'dropdown-lvl__${parentMenu.idParentMenu}__'">
 							<li th:each="menu : ${parentMenu.menuList}">
 								<span class="glyphicon glyphicon-menu-right"></span>
-								<a th:href="'/david__${menu.urlName}__'" th:text="${menu.menuName}"></a>
+								<a class="evetMenu" th:href="'/david__${menu.urlName}__'" th:text="${menu.menuName}"></a>
 							</li>
 						</ul>
 					</div>
